@@ -13,7 +13,7 @@ ctypes.windll.user32.SetProcessDPIAware()
 pygame.init()
 
 # Set game title
-pygame.display.set_caption("Count Forever")
+pygame.display.set_caption("Counters")
 
 # Create the screen
 flags = FULLSCREEN | DOUBLEBUF
