@@ -5,10 +5,10 @@ from constants.basic_settings import SCREEN_WIDTH, SCREEN_HEIGHT
 from constants.colors import *
 from controllers.mouse_controller import MouseEventListener
 
-"""
+
 import ctypes
 ctypes.windll.user32.SetProcessDPIAware()
-"""
+
 
 pygame.init()
 
