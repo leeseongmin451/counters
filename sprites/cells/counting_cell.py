@@ -45,7 +45,7 @@ class CountingCell(Button):
         self.add(self.group)
 
         self.number = 1
-        self.add_text("{}", (round(self.number, ROUNDING_DIGITS), ), "fonts/Quicksand-Bold.ttf", 20, "center", (self.width // 2, self.height // 2))
+        self.add_text("{}", (round(self.number, ROUNDING_DIGITS), ), "fonts/Quicksand-Bold.ttf", 15, "center", (self.width // 2, self.height // 2))
 
 
         self.worth = 0
