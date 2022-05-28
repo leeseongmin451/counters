@@ -32,6 +32,7 @@ class ConnectorGenerationController:
         self.connector_guide: Union[None, CellConnectorInstallGuide] = None
 
         # Turn off all cells except connectable ones
+        """
         for cell in CountingCell.group:
             if isinstance(cell, MainCell) or cell.distance_from_main == 1:
                 cell.deactivate()
@@ -46,6 +47,7 @@ class ConnectorGenerationController:
                         break
                 if all_connected:
                     cell.deactivate()
+        """
 
         # All CountingCells' operation will be "connect"
         CountingCell.current_operation = CountingCell.operate_connect
@@ -59,7 +61,8 @@ class ConnectorGenerationController:
 
         mouse_state = Player.mouse
         key_state = Player.keys
-
+        ##################################################################################################
+        """
         if self.state == "init" and mouse_state.left.clicked:
             for cell in self.available_cells:
                 if cell.selected:
@@ -101,7 +104,29 @@ class ConnectorGenerationController:
                         self.install_connector()
                         self.terminate()
                         break
+        """
+        ##################################################################################################
+        if self.state == "init" and mouse_state.left.clicked:
+            for cell in CountingCell.group:
+                if cell.selected:
+                    self.selected_sender = cell
+                    self.state = "sender_selected"
+                    self.connector_guide = CellConnectorInstallGuide(cell.field_pos)
+                    cell.selected = False
 
+        elif self.state == "sender_selected":
+            self.connector_guide.update()
+
+            if mouse_state.left.clicked:
+                for cell in CountingCell.group:
+                    if cell.selected and cell != self.selected_sender:
+                        self.selected_receiver = cell
+                        cell.selected = False
+
+                        self.install_connector()
+                        self.terminate()
+                        break
+        ##################################################################################################
         if key_state[pygame.K_ESCAPE]:
             self.terminate()
 
