@@ -1,6 +1,13 @@
 from typing import Tuple
 from init import *
 from sprites.camera import Camera
+from decimal import *
+
+
+getcontext().prec = 100
+LN_10 = Decimal("10").ln()
+LOG_LN_10 = Decimal("10").ln().log10()
+PRECISION = 20
 
 
 camera = Camera()
@@ -38,3 +45,17 @@ def get_pos_in_rect(pos1: Tuple[int, int], pos2: Tuple[int, int]) -> Tuple[Tuple
     relative_pos1 = (pos1[0] - offset_x, pos1[1] - offset_y)
     relative_pos2 = (pos2[0] - offset_x, pos2[1] - offset_y)
     return relative_pos1, relative_pos2
+
+
+def tetration_log10(n):
+    int_part = Decimal("0")
+
+    n = Decimal(str(n))
+
+    while n >= 10:
+        n = n.log10()
+        int_part += 1
+
+    frac_part = (n.log10() * (LN_10 - 1) + 1).log10() / LOG_LN_10
+
+    return int_part + frac_part
